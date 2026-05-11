@@ -1,0 +1,7 @@
+{
+  "owner": "deepakputhraya",
+  "name": "action-pr-title",
+  "visibility": "internal",
+  "description": "Github action to enforce Pull Request title conventions",
+  "block_publish": false
+}
