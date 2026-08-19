@@ -9,7 +9,7 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 | Version | Tag | Upstream commit |
 |---------|-----|-----------------|
 | v1.0.1 | [`v1.0.1`](https://github.com/chainguard-actions/deepakputhraya-action-pr-title/tree/v1.0.1) | — |
-| v1.0.2 | [`v1.0.2`](https://github.com/chainguard-actions/deepakputhraya-action-pr-title/tree/v1.0.2) | — |
+| v1.0.2 | [`v1.0.2`](https://github.com/chainguard-actions/deepakputhraya-action-pr-title/tree/v1.0.2) | [`3864beb`](https://github.com/deepakputhraya/action-pr-title/commit/3864bebc79c5f829d25dd42d3c6579d040b0ef16) |
 
 ## Privacy
 
