@@ -1,0 +1,33 @@
+name: Test with prefix inputs - invalid event handling
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        continue-on-error: true
+        with:
+          github_token: ${{ github.token }}
+          allowed_prefixes: 'feature,hotfix,bugfix,chore'
+          disallowed_prefixes: 'feat,fix,wip'
+          prefix_case_sensitive: 'false'
+      - name: Assert action fails gracefully on non-PR event with prefix inputs
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          # Under act, eventName is workflow_dispatch (not pull_request),
+          # so the action is expected to call setFailed("Invalid event: workflow_dispatch")
+          # regardless of the prefix inputs provided.
+          if [ "$OUTCOME" = "failure" ]; then
+            echo "PASS: action failed gracefully as expected (not a pull_request event)"
+          elif [ "$OUTCOME" = "success" ]; then
+            echo "FAIL: action unexpectedly succeeded on a non-PR event"
+            exit 1
+          else
+            echo "FAIL: unexpected outcome '$OUTCOME'"
+            exit 1
+          fi

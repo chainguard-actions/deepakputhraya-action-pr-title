@@ -1,12 +1,43 @@
+<!-- markdownlint-disable -->
+
 # Hardening Report: deepakputhraya--action-pr-title/v1.0.2
 
 > This file was generated automatically by the hardening agent.
 
-**Policy SHA:** `ff50f15e4b79bfbf764dafdfd2579175a6ea9771`
+**Policy SHA:** `d636be7e43ef829af6e853da6b3c7566db9f72fe`
 
 **Test Policy SHA:** `843adf9e4b8f85d0c08b27b9d0b09dd094b54702`
 
-**Harden Agent Version:** `1`
+**Harden Agent Version:** `2`
 
-Action **deepakputhraya--action-pr-title/v1.0.2** was hardened automatically. 0 finding(s) were identified and resolved across 0 iteration(s).
+Action **deepakputhraya--action-pr-title/v1.0.2** was hardened automatically. 2 finding(s) were identified and resolved across 1 iteration(s).
+
+## Findings Fixed
+
+### unpinned-uses (severity: high)
+
+The workflow file .github/workflows/main.yml references two Actions using mutable refs instead of full 40-character commit SHAs. `actions/checkout@master` uses a branch name (which can be force-pushed to point at arbitrary code) and `actions/setup-node@v1` uses a mutable tag. Both should be pinned to a full SHA digest (e.g. `actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4`) to prevent supply-chain attacks.
+
+Locations:
+
+- `.github/workflows/main.yml:13`
+- `.github/workflows/main.yml:14`
+
+### missing-permissions (severity: medium)
+
+The workflow file .github/workflows/main.yml has no top-level `permissions:` key and the only job (`build`) also has no job-level `permissions:` key. Without explicit permissions, the GITHUB_TOKEN is granted its default (potentially broad) permissions. A minimal permissions block such as `permissions: pull-requests: read` should be added at the top level or job level.
+
+Locations:
+
+- `.github/workflows/main.yml:1`
+
+## Iteration Notes
+
+### Iteration 1
+
+**Fixes applied:** unpinned-uses, missing-permissions
+
+**Notes:**
+
+Fixed .github/workflows/main.yml: (1) Pinned `actions/checkout@master` to full SHA `61b9e3751b92087fd0b06925ba6dd6314e06f089` and `actions/setup-node@v1` to full SHA `f1f314fca9dfce2769ece7d933488f076716723e`, preserving original refs as comments. (2) Added top-level `permissions: pull-requests: read` block to restrict GITHUB_TOKEN to the minimum permissions needed for a PR title validation workflow.
 
