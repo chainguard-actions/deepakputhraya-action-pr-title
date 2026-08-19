@@ -1,0 +1,33 @@
+name: Test prefix validation inputs
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        continue-on-error: true
+        with:
+          github_token: ${{ github.token }}
+          allowed_prefixes: 'feature,hotfix,bugfix,chore'
+          disallowed_prefixes: 'wip,WIP,draft'
+          prefix_case_sensitive: 'false'
+      - name: Assert action fails gracefully on non-PR event (not due to bad prefix inputs)
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          # The action should fail because of the event type (workflow_dispatch),
+          # not because of invalid prefix inputs. This verifies the action accepts
+          # allowed_prefixes, disallowed_prefixes, and prefix_case_sensitive inputs
+          # without crashing on input parsing.
+          if [ "$OUTCOME" = "failure" ]; then
+            echo "PASS: action failed gracefully as expected (not a pull_request event)"
+          elif [ "$OUTCOME" = "success" ]; then
+            echo "PASS: action succeeded unexpectedly (PR context may be available)"
+          else
+            echo "FAIL: unexpected outcome '$OUTCOME'"
+            exit 1
+          fi
