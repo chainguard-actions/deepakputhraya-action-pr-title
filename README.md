@@ -6,10 +6,10 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 
 ## Versions
 
-| Version | Tag | Upstream commit |
-|---------|-----|-----------------|
-| v1.0.1 | [`v1.0.1`](https://github.com/chainguard-actions/deepakputhraya-action-pr-title/tree/v1.0.1) | [`c21a28d`](https://github.com/deepakputhraya/action-pr-title/commit/c21a28d317f15d7d3579e849bb7760502973fb18) |
-| v1.0.2 | [`v1.0.2`](https://github.com/chainguard-actions/deepakputhraya-action-pr-title/tree/v1.0.2) | [`3864beb`](https://github.com/deepakputhraya/action-pr-title/commit/3864bebc79c5f829d25dd42d3c6579d040b0ef16) |
+| Version | Tag | Upstream commit | Hardening report |
+|---------|-----|-----------------|------------------|
+| v1.0.1 | [`v1.0.1`](https://github.com/chainguard-actions/deepakputhraya-action-pr-title/tree/v1.0.1) | [`c21a28d`](https://github.com/deepakputhraya/action-pr-title/commit/c21a28d317f15d7d3579e849bb7760502973fb18) | [`HARDENING.md`](https://github.com/chainguard-actions/deepakputhraya-action-pr-title/blob/v1.0.1/HARDENING.md) |
+| v1.0.2 | [`v1.0.2`](https://github.com/chainguard-actions/deepakputhraya-action-pr-title/tree/v1.0.2) | [`3864beb`](https://github.com/deepakputhraya/action-pr-title/commit/3864bebc79c5f829d25dd42d3c6579d040b0ef16) | [`HARDENING.md`](https://github.com/chainguard-actions/deepakputhraya-action-pr-title/blob/v1.0.2/HARDENING.md) |
 
 ## Privacy
 
